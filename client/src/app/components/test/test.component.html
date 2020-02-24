@@ -1,0 +1,11 @@
+<button class="btn btn-large btn-primary" (click)="getWeather()">
+  Click for proxied server response, see console
+</button>
+<div *ngIf="weather">
+  <div *ngFor="let data of weather">
+    <p>Currently: {{ data.currently.summary ? data.currently.summary : "" }}</p>
+    <p>Minutely: {{ data.minutely.summary ? data.minutely.summary : "" }}</p>
+    <p>Hourly: {{ data.hourly.summary ? data.hourly.summary : "" }}</p>
+    <p>Daily: {{ data.daily.summary ? data.daily.summary : "" }}</p>
+  </div>
+</div>
