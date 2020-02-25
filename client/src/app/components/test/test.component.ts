@@ -8,34 +8,18 @@ import { WeatherService } from "../../services/weather.service";
 export class TestComponent implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
-  @Input() response;
-  @Input() result;
   @Input() weather;
+  @Input() location;
   ngOnInit(): void {}
 
-  async fire() {
-    let result = await fetch("/api/hello", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      }
-    });
-
-    const body = await result.json();
-    console.log(body);
-    return (this.response = body);
-  }
-
-  test(): void {
+  getWeather(locality, country): void {
     this.weatherService
-      .test()
-      .subscribe(result => (console.log(result), (this.result = result)));
-  }
-
-  getWeather(): void {
-    this.weatherService
-      .getWeather()
-      .subscribe(result => (this.weather = result));
+      .getWeather(locality, country)
+      .subscribe(
+        result => (
+          (this.weather = result),
+          (this.location = { locality: locality, country: country })
+        )
+      );
   }
 }

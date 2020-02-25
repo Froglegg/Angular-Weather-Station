@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { LocationService } from "./location.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 
@@ -11,20 +10,12 @@ import { catchError, map, tap } from "rxjs/operators";
   providedIn: "root"
 })
 export class WeatherService {
-  constructor(
-    private http: HttpClient,
-    private locationService: LocationService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   // TO DO; link up location service to get lat long for dark sky api
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
-  };
-
-  location = {
-    locality: "Atlanta",
-    country: "USA"
   };
 
   test(): Observable<any> {
@@ -34,11 +25,17 @@ export class WeatherService {
     );
   }
 
-  getWeather(): Observable<any> {
-    return this.http.post("/api/weather", this.location, this.httpOptions).pipe(
-      tap(data => console.log(data)),
-      catchError(this.handleError("test"))
-    );
+  getWeather(locality, country): Observable<any> {
+    return this.http
+      .post(
+        "/api/weather",
+        { locality: locality, country: country },
+        this.httpOptions
+      )
+      .pipe(
+        tap(data => console.log(data)),
+        catchError(this.handleError("test"))
+      );
   }
 
   /**

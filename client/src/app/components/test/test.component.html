@@ -1,6 +1,28 @@
-<button class="btn btn-large btn-primary" (click)="getWeather()">
-  Click for proxied server response, see console
-</button>
+<div>
+  <label
+    >Locality:
+    <input #locality />
+  </label>
+  <br />
+  <label
+    >Country:
+    <input #country />
+  </label>
+  <br />
+  <button
+    (click)="
+      getWeather(locality.value, country.value);
+      locality.value = '';
+      country.value = ''
+    "
+    class="btn btn-primary"
+  >
+    Search
+  </button>
+</div>
+<div *ngIf="location">
+  <p>Weather for {{ location.locality }}, {{ location.country }}</p>
+</div>
 <div *ngIf="weather">
   <div *ngFor="let data of weather">
     <p>Currently: {{ data.currently.summary ? data.currently.summary : "" }}</p>

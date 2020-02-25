@@ -6,9 +6,20 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 
 import { TestComponent } from "../app/components/test/test.component";
+import { WeatherViewComponent } from "../app/components/weather-view/weather-view.component";
+import { WeatherDashComponent } from "../app/components/weather-dash/weather-dash.component";
+import { FormComponent } from "../app/components/form/form.component";
+import { TableComponent } from "../app/components/table/table.component";
 
 @NgModule({
-  declarations: [AppComponent, TestComponent],
+  declarations: [
+    AppComponent,
+    TestComponent,
+    WeatherViewComponent,
+    WeatherDashComponent,
+    FormComponent,
+    TableComponent
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
