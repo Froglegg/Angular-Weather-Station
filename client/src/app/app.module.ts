@@ -10,6 +10,7 @@ import { WeatherViewComponent } from "../app/components/weather-view/weather-vie
 import { WeatherDashComponent } from "../app/components/weather-dash/weather-dash.component";
 import { FormComponent } from "../app/components/form/form.component";
 import { TableComponent } from "../app/components/table/table.component";
+import { EmitterTestComponent } from "../app/components/emitter-test/emitter-test.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TableComponent } from "../app/components/table/table.component";
     WeatherViewComponent,
     WeatherDashComponent,
     FormComponent,
-    TableComponent
+    TableComponent,
+    EmitterTestComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

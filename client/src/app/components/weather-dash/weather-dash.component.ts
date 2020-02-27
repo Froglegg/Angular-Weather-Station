@@ -8,5 +8,17 @@ import { Component, OnInit } from "@angular/core";
 export class WeatherDashComponent implements OnInit {
   constructor() {}
 
+  weather: any;
+  location: any;
+
+  getWeather(weather) {
+    console.log(weather);
+    this.weather = weather;
+  }
+
+  getLocation(location) {
+    console.log(location);
+    this.location = location;
+  }
   ngOnInit(): void {}
 }

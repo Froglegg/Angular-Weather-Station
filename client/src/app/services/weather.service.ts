@@ -12,8 +12,6 @@ import { catchError, map, tap } from "rxjs/operators";
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
-  // TO DO; link up location service to get lat long for dark sky api
-
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };

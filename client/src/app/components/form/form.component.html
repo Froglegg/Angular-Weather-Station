@@ -5,7 +5,7 @@
   data-toggle="modal"
   data-target="#weatherModal"
 >
-  Launch demo modal
+  Get Weather Data
 </button>
 
 <!-- Modal -->
@@ -21,7 +21,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="weatherModalLabel">
-          Get your weather data folks
+          Please enter a valid city or town and its ISO country code (e.g.,
+          Atlanta, USA)
         </h5>
         <button
           type="button"
@@ -47,9 +48,10 @@
             </select>
           </div>
           <button
-            type="submit"
+            type="button"
             class="btn btn-primary"
-            (click)="getWeather(locality.value, country.value)"
+            data-dismiss="modal"
+            (click)="onGetWeather(locality.value, country.value)"
           >
             Submit
           </button>
