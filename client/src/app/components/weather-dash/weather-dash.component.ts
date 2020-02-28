@@ -11,11 +11,13 @@ import { LocationStrategy } from "@angular/common";
 export class WeatherDashComponent implements OnInit {
   constructor() {}
 
-  weather: Weather;
+  weather: Weather[];
   location: Location;
   locations: Location[];
 
-  getWeather(weather: Weather) {
+  getWeather(weather: Weather[]) {
+    console.log("get weather in dash");
+    console.log(weather);
     this.weather = weather;
   }
 

@@ -10,7 +10,7 @@ import { Weather } from "../../interfaces/weather";
 export class WeatherViewComponent implements OnInit {
   constructor() {}
 
-  @Input() weather: Weather;
+  @Input() weather: Weather[];
   @Input() location: Location;
 
   ngOnInit(): void {}
