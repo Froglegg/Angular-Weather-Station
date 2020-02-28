@@ -1,12 +1,7 @@
+// ? denotes optional property
 export interface Weather {
-  location: {
-    country: string;
-    locality: string;
-  };
-  forecast: {
-    currently: string;
-    minutely: string;
-    hourly: string;
-    daily: string;
-  };
+  currently?: object;
+  minutely?: object;
+  hourly?: object;
+  daily?: object;
 }

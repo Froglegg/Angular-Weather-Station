@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "../../interfaces/location";
+import { Weather } from "../../interfaces/weather";
 
 @Component({
   selector: "app-weather-dash",
@@ -8,17 +10,24 @@ import { Component, OnInit } from "@angular/core";
 export class WeatherDashComponent implements OnInit {
   constructor() {}
 
-  weather: any;
-  location: any;
+  weather: Weather;
+  location: Location;
+  locations: Location[];
 
-  getWeather(weather) {
+  getWeather(weather: Weather) {
     console.log(weather);
     this.weather = weather;
   }
 
-  getLocation(location) {
-    console.log(location);
+  getLocation(location: Location) {
     this.location = location;
+    this.locations.push(location);
   }
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    this.locations = [
+      { locality: "atlanta", country: "USA" },
+      { locality: "Boston", country: "USA" }
+    ];
+  }
 }

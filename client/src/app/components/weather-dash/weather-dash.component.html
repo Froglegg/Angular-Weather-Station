@@ -2,14 +2,14 @@
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
 ></app-form>
-<div *ngIf="weather">
-  <div *ngIf="location">
-    <h3>{{ location.locality }}, {{ location.country }}</h3>
-  </div>
-  <div *ngFor="let data of weather">
-    <p>Currently: {{ data.currently.summary ? data.currently.summary : "" }}</p>
-    <p>Minutely: {{ data.minutely.summary ? data.minutely.summary : "" }}</p>
-    <p>Hourly: {{ data.hourly.summary ? data.hourly.summary : "" }}</p>
-    <p>Daily: {{ data.daily.summary ? data.daily.summary : "" }}</p>
-  </div>
-</div>
+<app-weather-view
+  *ngIf="weather"
+  [weather]="weather"
+  [location]="location"
+></app-weather-view>
+<app-table
+  *ngIf="locations"
+  [locations]="locations"
+  (weatherEvent)="getWeather($event)"
+  (locationEvent)="getLocation($event)"
+></app-table>

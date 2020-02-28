@@ -1,1 +1,21 @@
-<p>weather-view works!</p>
+<div *ngIf="weather" class="pt-3">
+  <h3>Weather for {{ location.locality }}, {{ location.country }}</h3>
+  <div class="table-responsive">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Currently</th>
+          <th>Minutely</th>
+          <th>Hourly</th>
+          <th>Daily</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let data of weather">
+        <td>{{ data.currently.summary ? data.currently.summary : "" }}</td>
+        <td>{{ data.minutely.summary ? data.minutely.summary : "" }}</td>
+        <td>{{ data.hourly.summary ? data.hourly.summary : "" }}</td>
+        <td>{{ data.daily.summary ? data.daily.summary : "" }}</td>
+      </tbody>
+    </table>
+  </div>
+</div>
