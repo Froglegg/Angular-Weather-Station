@@ -12,6 +12,7 @@ export class TableComponent implements OnInit {
 
   @Output() weatherEvent = new EventEmitter<Weather>();
   @Output() locationEvent = new EventEmitter<Location>();
+  @Output() removeLocationEvent = new EventEmitter<Location>();
 
   onGetWeather(locality, country): void {
     let location = { locality, country };
@@ -19,6 +20,11 @@ export class TableComponent implements OnInit {
       this.weatherEvent.emit(result);
       this.locationEvent.emit(location);
     });
+  }
+
+  onRemoveLocation(locality, country): void {
+    let location = { locality, country };
+    this.removeLocationEvent.emit(location);
   }
 
   constructor(private weatherService: WeatherService) {}

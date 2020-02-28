@@ -20,7 +20,14 @@
             Get Data
           </button>
         </td>
-        <td><button class="btn btn-danger">Remove</button></td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="onRemoveLocation(location.locality, location.country)"
+          >
+            Remove
+          </button>
+        </td>
       </tbody>
     </table>
   </div>

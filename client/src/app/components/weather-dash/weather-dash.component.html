@@ -8,8 +8,9 @@
   [location]="location"
 ></app-weather-view>
 <app-table
-  *ngIf="locations"
+  *ngIf="locations.length"
   [locations]="locations"
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
+  (removeLocationEvent)="removeLocation($event)"
 ></app-table>
