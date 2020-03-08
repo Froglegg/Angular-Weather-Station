@@ -8,6 +8,8 @@ import { WeatherViewComponent } from "../app/components/weather-view/weather-vie
 import { WeatherDashComponent } from "../app/components/weather-dash/weather-dash.component";
 import { FormComponent } from "../app/components/form/form.component";
 import { TableComponent } from "../app/components/table/table.component";
+import { LoginComponent } from "../app/components/login/login.component";
+import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { TableComponent } from "../app/components/table/table.component";
     WeatherViewComponent,
     WeatherDashComponent,
     FormComponent,
-    TableComponent
+    TableComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

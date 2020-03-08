@@ -18,9 +18,6 @@ export class FormComponent implements OnInit {
   onGetWeather(locality, country): void {
     let location = { locality, country };
     this.weatherService.getWeather(locality, country).subscribe(result => {
-      console.log("\n\nfrom weather service direclty\n\n");
-      console.log(result);
-
       this.weatherEvent.emit(result);
       this.locationEvent.emit(location);
     });

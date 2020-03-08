@@ -15,7 +15,14 @@
         <td>
           <button
             (click)="onGetWeather(location.locality, location.country)"
-            class="btn btn-success"
+            [disabled]="
+              currentLocation.locality !== location.locality ? false : true
+            "
+            [className]="
+              currentLocation.locality !== location.locality
+                ? 'btn btn-success'
+                : 'btn btn-success disabled'
+            "
           >
             Get Data
           </button>

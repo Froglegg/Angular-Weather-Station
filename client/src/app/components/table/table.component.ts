@@ -9,6 +9,7 @@ import { WeatherService } from "../../services/weather.service";
 })
 export class TableComponent implements OnInit {
   @Input() locations: Location[];
+  @Input() currentLocation: Location;
 
   @Output() weatherEvent = new EventEmitter<Weather>();
   @Output() locationEvent = new EventEmitter<Location>();
@@ -29,5 +30,7 @@ export class TableComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.currentLocation);
+  }
 }

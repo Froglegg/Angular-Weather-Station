@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "../../interfaces/location";
 import { Weather } from "../../interfaces/weather";
-import { LocationStrategy } from "@angular/common";
 
 @Component({
   selector: "app-weather-dash",
@@ -16,8 +15,6 @@ export class WeatherDashComponent implements OnInit {
   locations: Location[];
 
   getWeather(weather: Weather[]) {
-    console.log("get weather in dash");
-    console.log(weather);
     this.weather = weather;
   }
 
@@ -31,12 +28,9 @@ export class WeatherDashComponent implements OnInit {
   }
 
   removeLocation(location: Location) {
-    console.log(`fired, removing ${location.locality}`);
-    console.log(this.locations);
     this.locations = this.locations.filter(l => {
       return l.locality !== location.locality;
     });
-    console.log(this.locations);
   }
 
   ngOnInit(): void {

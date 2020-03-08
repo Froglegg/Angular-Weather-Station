@@ -10,6 +10,7 @@
 <app-table
   *ngIf="locations.length"
   [locations]="locations"
+  [currentLocation]="location"
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
   (removeLocationEvent)="removeLocation($event)"
