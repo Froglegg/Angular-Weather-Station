@@ -10,6 +10,9 @@ import { FormComponent } from "../app/components/form/form.component";
 import { TableComponent } from "../app/components/table/table.component";
 import { LoginComponent } from "../app/components/login/login.component";
 import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
+import { NoDataComponent } from "../app/components/no-data/no-data.component";
+
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -19,9 +22,15 @@ import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
     FormComponent,
     TableComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    NoDataComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

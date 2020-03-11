@@ -13,6 +13,7 @@ export class WeatherDashComponent implements OnInit {
   weather: Weather[];
   location: Location;
   locations: Location[];
+  noData: boolean;
 
   getWeather(weather: Weather[]) {
     this.weather = weather;
@@ -31,6 +32,10 @@ export class WeatherDashComponent implements OnInit {
     this.locations = this.locations.filter(l => {
       return l.locality !== location.locality;
     });
+  }
+
+  noDataEvent(boolean: boolean) {
+    this.noData = boolean;
   }
 
   ngOnInit(): void {

@@ -1,11 +1,14 @@
 <app-form
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
+  (noDataEvent)="noDataEvent($event)"
 ></app-form>
+<!-- <app-no-data *ngIf="noData" [location]="location"> </app-no-data> -->
 <app-weather-view
-  *ngIf="weather"
+  *ngIf="weather || noData"
   [weather]="weather"
   [location]="location"
+  [noData]="noData"
 ></app-weather-view>
 <app-table
   *ngIf="locations.length"
