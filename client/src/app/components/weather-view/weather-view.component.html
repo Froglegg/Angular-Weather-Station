@@ -1,4 +1,4 @@
-<div *ngIf="weather && !noData" class="pt-3">
+<div *ngIf="weather && !noData" class="pt-3" #elseBlock>
   <h3>Weather for {{ location.locality }}, {{ location.country }}</h3>
   <div class="table-responsive">
     <table class="table table-dark">

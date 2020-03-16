@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Location } from "../../interfaces/location";
 import { Weather } from "../../interfaces/weather";
 import { WeatherService } from "../../services/weather.service";
+import { ConditionalExpr } from "@angular/compiler";
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
@@ -10,6 +11,8 @@ import { WeatherService } from "../../services/weather.service";
 export class TableComponent implements OnInit {
   @Input() locations: Location[];
   @Input() currentLocation: Location;
+  loading: boolean;
+  clickedLocation: Location;
 
   @Output() weatherEvent = new EventEmitter<Weather>();
   @Output() locationEvent = new EventEmitter<Location>();
@@ -18,11 +21,17 @@ export class TableComponent implements OnInit {
 
   onGetWeather(locality, country): void {
     let location = { locality, country };
+
+    this.loading = true;
+    this.clickedLocation = location;
+
     this.weatherService.getWeather(locality, country).subscribe(result => {
+      this.loading = false;
+
       if (!result.dataExists) {
+        this.noDataEvent.emit(false);
         this.weatherEvent.emit(result);
         this.locationEvent.emit(location);
-        this.noDataEvent.emit(false);
       } else {
         this.noDataEvent.emit(true);
         this.locationEvent.emit(location);
@@ -38,6 +47,6 @@ export class TableComponent implements OnInit {
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
-    console.log(this.currentLocation);
+    console.log(this.clickedLocation);
   }
 }

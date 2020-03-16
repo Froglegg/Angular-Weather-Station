@@ -13,19 +13,31 @@
         <td>{{ location.locality }}</td>
         <td>{{ location.country }}</td>
         <td>
-          <button
-            (click)="onGetWeather(location.locality, location.country)"
-            [disabled]="
-              currentLocation.locality !== location.locality ? false : true
+          <mat-spinner
+            diameter="35"
+            *ngIf="
+              loading &&
+                clickedLocation.locality === location.locality &&
+                clickedLocation.country === location.country;
+              else elseBlock
             "
-            [className]="
-              currentLocation.locality !== location.locality
-                ? 'btn btn-success'
-                : 'btn btn-success disabled'
-            "
-          >
-            Get Data
-          </button>
+          ></mat-spinner>
+          <ng-template #elseBlock
+            ><button
+              #elseBlock
+              (click)="onGetWeather(location.locality, location.country)"
+              [disabled]="
+                currentLocation.locality !== location.locality ? false : true
+              "
+              [className]="
+                currentLocation.locality !== location.locality
+                  ? 'btn btn-success'
+                  : 'btn btn-success disabled'
+              "
+            >
+              Get Data
+            </button>
+          </ng-template>
         </td>
         <td>
           <button

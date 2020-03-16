@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WeatherViewComponent } from './weather-view.component';
+import { WeatherViewComponent } from "./weather-view.component";
 
-describe('WeatherViewComponent', () => {
+describe("WeatherViewComponent", () => {
   let component: WeatherViewComponent;
   let fixture: ComponentFixture<WeatherViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherViewComponent ]
-    })
-    .compileComponents();
+      declarations: [WeatherViewComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('WeatherViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
