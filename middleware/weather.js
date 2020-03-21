@@ -37,8 +37,7 @@ const getData = (req, res) => {
 };
 
 const getLocations = (req, res, db) => {
-  db.select("*")
-    .from("locations")
+  db.find()
     .then(items => {
       if (items.length) {
         res.json(items);
@@ -51,9 +50,7 @@ const getLocations = (req, res, db) => {
 
 const getUserLocations = (req, res, db) => {
   const { id } = req.params;
-  db.select("*")
-    .from("locations")
-    .where({ user: id })
+  db.find({ user: id })
     .then(items => {
       if (items) {
         res.json(items);
@@ -65,7 +62,7 @@ const getUserLocations = (req, res, db) => {
 };
 
 const postLocation = (req, res, db) => {
-  const { user, country, locality } = req.body;
+  const { country, locality, user } = req.body;
 
   // check to see if location even exists!
   axios
@@ -78,26 +75,32 @@ const postLocation = (req, res, db) => {
           err: `No results found for your request, please make sure to fill out both locality and country fields and that the place you are searching for actually exists`
         });
       } else {
-        db("locations")
-          .insert({ user, country, locality })
-          .returning("*")
-          .then(item => {
-            res.json(item);
-          })
-          .catch(err => res.status(400).json({ dbError: "db error" }));
+        db.create({ country, locality, user }, (err, result) => {
+          if (err) {
+            res.status(400).json({ dbError: "db error", err: err });
+          } else {
+            res.json(result);
+          }
+        });
       }
     });
 };
 
 const deleteLocation = (req, res, db) => {
   const { id } = req.params;
-  db("locations")
-    .where({ id })
-    .del()
-    .then(() => {
-      res.json({ delete: "true" });
-    })
-    .catch(err => res.status(400).json({ dbError: err }));
+  db.findOne({ _id: id }, (err, item) => {
+    if (err) {
+      res.status(400).json({ dbError: "cannot find that item", err: err });
+    } else {
+      item.remove(err => {
+        if (err) {
+          res.status(400).json({ dbError: "remove error", err: err });
+        } else {
+          res.json({ delete: "true" });
+        }
+      });
+    }
+  });
 };
 
 module.exports = {

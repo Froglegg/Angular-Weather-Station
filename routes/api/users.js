@@ -1,18 +1,63 @@
 const router = require("express").Router();
-const users = require("../../controllers/users");
-const db = require("../../db/config"); // importing the knex db config and function
+const User = require("../../db/models/User");
+const auth = require("../../middleware/auth");
 
-require("dotenv").config();
+router.get("/users/me", auth, async (req, res) => {
+  // View logged in user profile
+  res.send(req.user);
+});
 
-router.get("/users", (req, res) => users.getTableData(req, res, db));
-router.get("/users/:id", (req, res) => users.getRowData(req, res, db));
-// create route
-router.post("/users", (req, res) => users.createUser(req, res, db));
+router.post("/users", async (req, res) => {
+  // Create a new user
+  try {
+    const user = new User(req.body);
+    await user.save();
+    const token = await user.generateAuthToken();
+    res.status(201).send({ user, token });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
-router.put("/users/:id", (req, res) => users.putTableData(req, res, db));
-router.delete("/users/:id", (req, res) => users.deleteTableData(req, res, db));
+router.post("/users/login", async (req, res) => {
+  //Login a registered user
+  try {
+    const { email, password } = req.body;
+    const user = await User.findByCredentials(email, password);
+    if (!user) {
+      return res
+        .status(401)
+        .send({ error: "Login failed! Check authentication credentials" });
+    }
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
-//login route
-router.post("/login", (req, res) => users.login(req, res, db));
+router.post("/users/me/logout", auth, async (req, res) => {
+  // Log user out of the application
+  try {
+    req.user.tokens = req.user.tokens.filter(token => {
+      return token.token != req.token;
+    });
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.post("/users/me/logoutall", auth, async (req, res) => {
+  // Log user out of all devices
+  try {
+    req.user.tokens.splice(0, req.user.tokens.length);
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 module.exports = router;
