@@ -303,7 +303,9 @@
             type="button"
             class="btn btn-primary"
             data-dismiss="modal"
-            (click)="onGetWeather(locality.value, country.value)"
+            (click)="
+              onGetWeather({ locality: locality.value, country: country.value })
+            "
           >
             Submit
           </button>

@@ -25,7 +25,7 @@
           <ng-template #elseBlock
             ><button
               #elseBlock
-              (click)="onGetWeather(location.locality, location.country)"
+              (click)="onGetWeather(location)"
               [disabled]="
                 currentLocation.locality !== location.locality ? false : true
               "
@@ -40,10 +40,7 @@
           </ng-template>
         </td>
         <td>
-          <button
-            class="btn btn-danger"
-            (click)="onRemoveLocation(location.locality, location.country)"
-          >
+          <button class="btn btn-danger" (click)="onRemoveLocation(location)">
             Remove
           </button>
         </td>

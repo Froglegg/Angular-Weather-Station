@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Location } from "../../interfaces/location";
 import { Weather } from "../../interfaces/weather";
+import { WeatherService } from "../../services/weather.service";
 
 @Component({
   selector: "app-weather-dash",
@@ -8,12 +9,14 @@ import { Weather } from "../../interfaces/weather";
   styleUrls: ["./weather-dash.component.css"]
 })
 export class WeatherDashComponent implements OnInit {
-  constructor() {}
+  constructor(private weatherService: WeatherService) {}
 
   weather: Weather[];
   location: Location;
+  firstLocation: Location;
   locations: Location[];
   noData: boolean;
+  userId: string;
 
   getWeather(weather: Weather[]) {
     this.weather = weather;
@@ -29,6 +32,13 @@ export class WeatherDashComponent implements OnInit {
   }
 
   removeLocation(location: Location) {
+    console.log(location);
+    fetch(`/api/locations/${location._id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     this.locations = this.locations.filter(l => {
       return l.locality !== location.locality;
     });
@@ -38,7 +48,31 @@ export class WeatherDashComponent implements OnInit {
     this.noData = boolean;
   }
 
+  getUserLocations() {
+    fetch("/api/users/me")
+      .then(response => response.json())
+      .then(data => {
+        this.userId = data.id;
+        fetch(`/api/locations/${data.id}`)
+          .then(response => response.json())
+          .then(data => {
+            this.weatherService.getWeather(data[0]).subscribe(result => {
+              if (!result.noData) {
+                this.weather = result;
+                this.firstLocation = data[0];
+                this.location = data[0];
+                this.locations = data;
+              }
+            });
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+  }
+
   ngOnInit(): void {
+    console.log("INITIALIZING, this should not happen too often :)");
     this.locations = [];
+    this.getUserLocations();
   }
 }

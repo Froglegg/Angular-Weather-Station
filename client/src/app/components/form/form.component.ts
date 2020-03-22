@@ -14,19 +14,33 @@ export class FormComponent implements OnInit {
   @Output() locationEvent = new EventEmitter<Location>();
   @Output() noDataEvent = new EventEmitter<boolean>();
 
+  @Input() userId;
+
   ngOnInit(): void {}
 
-  onGetWeather(locality, country): void {
-    let location = { locality, country };
-    this.weatherService.getWeather(locality, country).subscribe(result => {
-      if (!result.dataExists) {
-        this.weatherEvent.emit(result);
-        this.locationEvent.emit(location);
-        this.noDataEvent.emit(false);
-      } else {
-        this.noDataEvent.emit(true);
-        this.locationEvent.emit(location);
-      }
-    });
+  onGetWeather(location: Location): void {
+    location.user = this.userId;
+
+    fetch("/api/locations", {
+      method: "POST",
+      body: JSON.stringify(location),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => {
+        res.json().then(response => {
+          this.weatherService.getWeather(response).subscribe(result => {
+            console.log(result);
+            if (!result.noData) {
+              this.weatherEvent.emit(result);
+              this.locationEvent.emit(response);
+              this.noDataEvent.emit(false);
+            } else {
+              this.noDataEvent.emit(true);
+              this.locationEvent.emit(response);
+            }
+          });
+        });
+      })
+      .catch(err => console.log(err));
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
-
+import { Location } from "../interfaces/location";
 // TODO; create weather interface and use it in observable type
 // import { Weather } from "../interfaces/weather";
 
@@ -23,17 +23,11 @@ export class WeatherService {
     );
   }
 
-  getWeather(locality, country): Observable<any> {
-    return this.http
-      .post(
-        "/api/weather",
-        { locality: locality, country: country },
-        this.httpOptions
-      )
-      .pipe(
-        tap(data => console.log(data)),
-        catchError(this.handleError("test"))
-      );
+  getWeather(location): Observable<any> {
+    return this.http.post("/api/weather", location, this.httpOptions).pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError("test"))
+    );
   }
 
   /**

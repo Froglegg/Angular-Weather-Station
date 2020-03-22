@@ -2,6 +2,7 @@
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
   (noDataEvent)="noDataEvent($event)"
+  [userId]="userId"
 ></app-form>
 <app-weather-view
   *ngIf="weather || noData"
@@ -13,6 +14,7 @@
   *ngIf="locations.length"
   [locations]="locations"
   [currentLocation]="location"
+  [firstLocation]="firstLocation"
   (weatherEvent)="getWeather($event)"
   (locationEvent)="getLocation($event)"
   (removeLocationEvent)="removeLocation($event)"
