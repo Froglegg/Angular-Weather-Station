@@ -1,4 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #121212;
+  font-family: "Roboto", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h1,
+h2,
+h3 {
+  font-family: "Roboto Mono", monospace;
+  color: white;
+}
+p,
+label,
+span,
+small {
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+.table-dark {
+  background-color: black;
+}
+
+.jumbotron {
+  background-color: #03dac6;
+}
+.jumbotron > h1,
+p {
+  color: black;
+}
+
+.modal-content {
+  background-color: #3700b3;
+}
+
+.btn-primary {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+  color: black;
+}
+.btn-primary:hover {
+  background-color: #976ace;
+  border-color: #8860b8;
+}
+
+.btn-success {
+  background-color: #03dac6;
+  border-color: #03dac6;
+  color: black;
+}
+.btn-success:disabled {
+  background-color: #03dac6;
+  border-color: #03dac6;
+  color: black;
+  opacity: 0.65;
+}
+.btn-success:hover {
+  background-color: #00a090;
+  border-color: #02a595;
+}
+
+.btn-danger {
+  background-color: #cf6679;
+  border-color: #cf6679;
+  color: black;
+}
+.btn-danger:hover {
+  background-color: #b15667;
+  border-color: #994b59;
+}

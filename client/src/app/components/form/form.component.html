@@ -5,7 +5,7 @@
   data-toggle="modal"
   data-target="#weatherModal"
 >
-  Get Weather Data
+  Add Location
 </button>
 
 <!-- Modal -->
@@ -20,9 +20,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 id="weatherModalLabel">
-          Please enter a valid locality (province, city, town, etc.) and select
-          its country.
+        <h3>
+          Please enter a valid locality (city or town) and country.
         </h3>
         <button
           type="button"
@@ -301,7 +300,7 @@
           </div>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-success"
             data-dismiss="modal"
             (click)="
               onGetWeather({ locality: locality.value, country: country.value })
@@ -312,7 +311,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
           Close
         </button>
       </div>

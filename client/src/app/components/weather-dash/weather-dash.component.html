@@ -1,21 +1,31 @@
-<app-form
-  (weatherEvent)="getWeather($event)"
-  (locationEvent)="getLocation($event)"
-  (noDataEvent)="noDataEvent($event)"
-  [userId]="userId"
-></app-form>
-<app-weather-view
-  *ngIf="weather || noData"
-  [weather]="weather"
-  [location]="location"
-  [noData]="noData"
-></app-weather-view>
-<app-table
-  *ngIf="locations.length"
-  [locations]="locations"
-  [currentLocation]="location"
-  [firstLocation]="firstLocation"
-  (weatherEvent)="getWeather($event)"
-  (locationEvent)="getLocation($event)"
-  (removeLocationEvent)="removeLocation($event)"
-></app-table>
+<div
+  class="jumbotron"
+  style="background-color:darkcyan; height: calc(18vh);color:black;"
+>
+  <h1>Weather Station</h1>
+  <p>Welcome, {{ userName }}</p>
+</div>
+<div class="container">
+  <h2>Dashboard</h2>
+  <app-form
+    (weatherEvent)="getWeather($event)"
+    (locationEvent)="getLocation($event)"
+    (noDataEvent)="noDataEvent($event)"
+    [userId]="userId"
+  ></app-form>
+  <app-weather-view
+    *ngIf="weather || noData"
+    [weather]="weather"
+    [location]="location"
+    [noData]="noData"
+  ></app-weather-view>
+  <app-table
+    *ngIf="locations.length"
+    [locations]="locations"
+    [currentLocation]="location"
+    [firstLocation]="firstLocation"
+    (weatherEvent)="getWeather($event)"
+    (locationEvent)="getLocation($event)"
+    (removeLocationEvent)="removeLocation($event)"
+  ></app-table>
+</div>

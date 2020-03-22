@@ -17,6 +17,7 @@ export class WeatherDashComponent implements OnInit {
   locations: Location[];
   noData: boolean;
   userId: string;
+  userName: string;
 
   getWeather(weather: Weather[]) {
     this.weather = weather;
@@ -53,6 +54,7 @@ export class WeatherDashComponent implements OnInit {
       .then(response => response.json())
       .then(data => {
         this.userId = data.id;
+        this.userName = data.name;
         fetch(`/api/locations/${data.id}`)
           .then(response => response.json())
           .then(data => {
@@ -71,7 +73,6 @@ export class WeatherDashComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("INITIALIZING, this should not happen too often :)");
     this.locations = [];
     this.getUserLocations();
   }
