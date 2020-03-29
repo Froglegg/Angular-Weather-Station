@@ -13,6 +13,7 @@ export class FormComponent implements OnInit {
   @Output() weatherEvent = new EventEmitter<Weather>();
   @Output() locationEvent = new EventEmitter<Location>();
   @Output() noDataEvent = new EventEmitter<boolean>();
+  @Output() loadingEvent = new EventEmitter<boolean>();
 
   @Input() userId;
 
@@ -20,7 +21,7 @@ export class FormComponent implements OnInit {
 
   onGetWeather(location: Location): void {
     location.user = this.userId;
-
+    this.loadingEvent.emit(true);
     fetch("/api/locations", {
       method: "POST",
       body: JSON.stringify(location),
@@ -30,6 +31,7 @@ export class FormComponent implements OnInit {
         res.json().then(response => {
           this.weatherService.getWeather(response).subscribe(result => {
             console.log(result);
+            this.loadingEvent.emit(false);
             if (!result.noData) {
               this.weatherEvent.emit(result);
               this.locationEvent.emit(response);
@@ -42,5 +44,16 @@ export class FormComponent implements OnInit {
         });
       })
       .catch(err => console.log(err));
+  }
+
+  // onKeyUp(event) {
+  //   event.prevent.default();
+  //   console.log(event);
+  //   if (event.key === "Enter") {
+  //     console.log(event);
+  //   }
+  // }
+  testFunction() {
+    alert("HEY");
   }
 }

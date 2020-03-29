@@ -1,48 +1,32 @@
 <div class="pt-3">
   <div class="table-responsive">
     <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>Locality</th>
-          <th>Country</th>
-          <th>Weather data</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
       <tbody *ngFor="let location of locations">
         <td>{{ location.locality }}</td>
         <td>{{ location.country }}</td>
         <td>
-          <mat-spinner
-            diameter="35"
-            *ngIf="
-              loading &&
-                clickedLocation.locality === location.locality &&
-                clickedLocation.country === location.country;
-              else elseBlock
+          <button
+            (click)="onGetWeather(location)"
+            [disabled]="
+              currentLocation.locality !== location.locality ? false : true
             "
-          ></mat-spinner>
-          <ng-template #elseBlock
-            ><button
-              #elseBlock
-              (click)="onGetWeather(location)"
-              [disabled]="
-                currentLocation.locality !== location.locality ? false : true
-              "
-              [className]="
-                currentLocation.locality !== location.locality
-                  ? 'btn btn-success'
-                  : 'btn btn-success disabled'
-              "
-            >
-              Get Data
-            </button>
-          </ng-template>
+            [className]="
+              currentLocation.locality !== location.locality
+                ? 'btn btn-success'
+                : 'btn btn-success disabled'
+            "
+          >
+            Get Data
+          </button>
         </td>
         <td>
-          <button class="btn btn-danger" (click)="onRemoveLocation(location)">
-            Remove
-          </button>
+          <i
+            class="large material-icons"
+            aria-hidden="true"
+            (click)="onRemoveLocation(location)"
+            style="text-align:center;"
+            >remove_circle_outline
+          </i>
         </td>
       </tbody>
     </table>

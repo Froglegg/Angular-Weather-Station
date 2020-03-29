@@ -18,9 +18,14 @@ export class WeatherDashComponent implements OnInit {
   noData: boolean;
   userId: string;
   userName: string;
+  loading: boolean;
 
   getWeather(weather: Weather[]) {
     this.weather = weather;
+  }
+
+  getLoading(boolean: boolean) {
+    this.loading = boolean;
   }
 
   getLocation(location: Location) {

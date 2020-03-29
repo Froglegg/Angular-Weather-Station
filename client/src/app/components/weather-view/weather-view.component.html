@@ -1,9 +1,22 @@
 <div *ngIf="weather && !noData" class="pt-3" #elseBlock>
-  <h3 style="text-align:center;">
+  <h3 style="text-align:center;margin-bottom:15px;">
     Weather for {{ location.locality }}, {{ location.country }}
   </h3>
-  <div class="table-responsive">
-    <table class="table table-dark">
+
+  <div style="margin:auto;height:75px">
+    <div *ngIf="loading">
+      <mat-spinner diameter="75"></mat-spinner>
+    </div>
+
+    <div *ngIf="!loading && weatherIcon.icon" style="text-align:center;">
+      <sc-skycons
+        [weather]="weatherIcon.icon.split('-').join(' ')"
+        [color]="'#03dac5'"
+      ></sc-skycons>
+    </div>
+  </div>
+  <div class="table-responsive" style="margin-top:25px;">
+    <table class="table table-dark weather-view-table">
       <thead>
         <tr>
           <th>Currently</th>

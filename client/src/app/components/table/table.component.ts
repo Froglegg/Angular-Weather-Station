@@ -11,20 +11,19 @@ export class TableComponent implements OnInit {
   @Input() locations: Location[];
   @Input() currentLocation: Location;
   @Input() firstLocation: Location;
-  loading: boolean;
   clickedLocation: Location;
 
   @Output() weatherEvent = new EventEmitter<Weather>();
   @Output() locationEvent = new EventEmitter<Location>();
   @Output() removeLocationEvent = new EventEmitter<Location>();
   @Output() noDataEvent = new EventEmitter<boolean>();
+  @Output() loadingEvent = new EventEmitter<boolean>();
 
   onGetWeather(location: Location): void {
-    this.loading = true;
     this.clickedLocation = location;
-
+    this.loadingEvent.emit(true);
     this.weatherService.getWeather(location).subscribe(result => {
-      this.loading = false;
+      this.loadingEvent.emit(false);
 
       if (!result.noData) {
         this.noDataEvent.emit(false);

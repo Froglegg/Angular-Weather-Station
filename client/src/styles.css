@@ -21,54 +21,91 @@ small {
   color: white;
 }
 
-.table-dark {
-  background-color: black;
+a {
+  color: cyan;
+}
+a:hover {
+  color: darkcyan;
 }
 
-.jumbotron {
-  background-color: #03dac6;
+.table-dark {
+  background-color: #1f1a24;
+  border-radius: 4px;
 }
-.jumbotron > h1,
-p {
-  color: black;
+th,
+td {
+  text-align: center;
+}
+.weather-view-table {
+  border: 2px solid#655f59;
+  border-radius: 4px;
 }
 
 .modal-content {
-  background-color: #3700b3;
+  background-color: #1f1a24;
 }
 
-.btn-primary {
+.jumbotron {
+  background-color: #1f1b24;
+  height: 175px;
+}
+.jumbotron > h1,
+p {
+  color: white;
+}
+
+.component-dark {
+  background-color: #1f1b24;
+  border-radius: 4px;
+  padding: 25px;
+}
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
   background-color: #bb86fc;
   border-color: #bb86fc;
   color: black;
+  box-shadow: none;
 }
 .btn-primary:hover {
-  background-color: #976ace;
-  border-color: #8860b8;
+  background-color: #8e44ea;
+  border-color: #8e44ea;
+  color: white;
 }
 
-.btn-success {
-  background-color: #03dac6;
-  border-color: #03dac6;
+.btn-success,
+.btn-success:active,
+.btn-success:focus {
+  background-color: #03dac5;
+  border-color: #03dac5;
   color: black;
+  box-shadow: none;
 }
 .btn-success:disabled {
-  background-color: #03dac6;
-  border-color: #03dac6;
-  color: black;
+  background-color: #41453b;
+  border-color: #41453b;
+  color: whitesmoke;
   opacity: 0.65;
+  pointer-events: none;
 }
 .btn-success:hover {
-  background-color: #00a090;
-  border-color: #02a595;
+  background-color: #00a885;
+  border-color: #00a885;
+  color: white;
 }
 
-.btn-danger {
-  background-color: #cf6679;
-  border-color: #cf6679;
-  color: black;
+.material-icons {
+  cursor: pointer;
 }
-.btn-danger:hover {
-  background-color: #b15667;
-  border-color: #994b59;
+.material-icons:hover {
+  transform: scale(1.1);
+}
+
+.skycons__canvas {
+  height: auto;
+  width: 150px;
+}
+
+.mat-spinner {
+  margin: auto;
 }

@@ -1,23 +1,23 @@
-<div
-  class="jumbotron"
-  style="background-color:darkcyan; height: calc(18vh);color:black;"
->
+<div class="jumbotron">
   <h1>Weather Station</h1>
   <p>Welcome, {{ userName }}</p>
 </div>
-<div class="container">
+<div class="container component-dark">
   <h2>Dashboard</h2>
   <app-form
     (weatherEvent)="getWeather($event)"
     (locationEvent)="getLocation($event)"
     (noDataEvent)="noDataEvent($event)"
+    (loadingEvent)="getLoading($event)"
     [userId]="userId"
   ></app-form>
   <app-weather-view
     *ngIf="weather || noData"
     [weather]="weather"
+    [weatherIcon]="weather ? weather[0].currently : ''"
     [location]="location"
     [noData]="noData"
+    [loading]="loading"
   ></app-weather-view>
   <app-table
     *ngIf="locations.length"
@@ -26,6 +26,7 @@
     [firstLocation]="firstLocation"
     (weatherEvent)="getWeather($event)"
     (locationEvent)="getLocation($event)"
+    (loadingEvent)="getLoading($event)"
     (removeLocationEvent)="removeLocation($event)"
   ></app-table>
 </div>

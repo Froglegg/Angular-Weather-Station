@@ -11,8 +11,10 @@ export class WeatherViewComponent implements OnInit {
   constructor() {}
 
   @Input() weather: Weather[];
+  @Input() weatherIcon;
   @Input() location: Location;
   @Input() noData: boolean;
+  @Input() loading: boolean;
 
   ngOnInit(): void {}
 }
