@@ -16,8 +16,8 @@ module.exports = {
         saveUninitialized: true,
         cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
         store: new redisStore({
-          host: "localhost",
-          port: 6379,
+          host: process.env.REDIS_URL,
+          port: process.env.PORT || 6379,
           client: redisClient,
           ttl: 86400
         })
