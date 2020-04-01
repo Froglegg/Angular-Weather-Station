@@ -14,6 +14,7 @@ import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { SkyconsModule } from "ngx-skycons";
+import { LogoutComponent } from "./components/logout/logout.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SkyconsModule } from "ngx-skycons";
     FormComponent,
     TableComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

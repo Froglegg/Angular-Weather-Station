@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "../../interfaces/location";
 import { Weather } from "../../interfaces/weather";
 import { WeatherService } from "../../services/weather.service";
+import { UserService } from "../../services/user.service";
+import { LocationsService } from "../../services/locations.service";
 
 @Component({
   selector: "app-weather-dash",
@@ -9,7 +11,11 @@ import { WeatherService } from "../../services/weather.service";
   styleUrls: ["./weather-dash.component.css"]
 })
 export class WeatherDashComponent implements OnInit {
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private userService: UserService,
+    private locationsService: LocationsService
+  ) {}
 
   weather: Weather[];
   location: Location;
@@ -38,13 +44,9 @@ export class WeatherDashComponent implements OnInit {
   }
 
   removeLocation(location: Location) {
-    console.log(location);
-    fetch(`/api/locations/${location._id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    this.locationsService
+      .removeLocation(`${location._id}`)
+      .subscribe(result => console.log(result));
     this.locations = this.locations.filter(l => {
       return l.locality !== location.locality;
     });
@@ -55,26 +57,20 @@ export class WeatherDashComponent implements OnInit {
   }
 
   getUserLocations() {
-    fetch("/api/users/me")
-      .then(response => response.json())
-      .then(data => {
-        this.userId = data.id;
-        this.userName = data.name;
-        fetch(`/api/locations/${data.id}`)
-          .then(response => response.json())
-          .then(data => {
-            this.weatherService.getWeather(data[0]).subscribe(result => {
-              if (!result.noData) {
-                this.weather = result;
-                this.firstLocation = data[0];
-                this.location = data[0];
-                this.locations = data;
-              }
-            });
-          })
-          .catch(err => console.log(err));
-      })
-      .catch(err => console.log(err));
+    this.userService.getdata().subscribe(result => {
+      this.userId = result.id;
+      this.userName = result.name;
+      this.locationsService.getUserLocations(result.id).subscribe(locations => {
+        this.firstLocation = locations[0];
+        this.location = locations[0];
+        this.locations = locations;
+        this.weatherService.getWeather(locations[0]).subscribe(weatherData => {
+          if (!weatherData.noData) {
+            this.weather = weatherData;
+          }
+        });
+      });
+    });
   }
 
   ngOnInit(): void {

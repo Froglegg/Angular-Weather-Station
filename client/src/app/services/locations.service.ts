@@ -2,32 +2,28 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
-import { Location } from "../interfaces/location";
-// TODO; create weather interface and use it in observable type
-// import { Weather } from "../interfaces/weather";
-
 @Injectable({
   providedIn: "root"
 })
-export class WeatherService {
+export class LocationsService {
   constructor(private http: HttpClient) {}
-
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
-
-  test(): Observable<any> {
-    return this.http.get("/api/hello").pipe(
-      tap(_ => console.log(`fetched weather`)),
+  getUserLocations(userId: string): Observable<any> {
+    return this.http.get(`/api/locations/${userId}`, this.httpOptions).pipe(
+      tap(data => data),
       catchError(this.handleError("test"))
     );
   }
 
-  getWeather(location): Observable<any> {
-    return this.http.post("/api/weather", location, this.httpOptions).pipe(
-      tap(data => data),
-      catchError(this.handleError("test"))
-    );
+  removeLocation(locationId: string): Observable<any> {
+    return this.http
+      .delete(`/api/locations/${locationId}`, this.httpOptions)
+      .pipe(
+        tap(data => data),
+        catchError(this.handleError("test"))
+      );
   }
 
   /**
@@ -41,7 +37,7 @@ export class WeatherService {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-
+      console.log(operation);
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
 

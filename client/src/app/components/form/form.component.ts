@@ -45,15 +45,4 @@ export class FormComponent implements OnInit {
       })
       .catch(err => console.log(err));
   }
-
-  // onKeyUp(event) {
-  //   event.prevent.default();
-  //   console.log(event);
-  //   if (event.key === "Enter") {
-  //     console.log(event);
-  //   }
-  // }
-  testFunction() {
-    alert("HEY");
-  }
 }

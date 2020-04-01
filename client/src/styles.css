@@ -94,6 +94,28 @@ p {
   color: white;
 }
 
+.btn-danger,
+.btn-danger:active,
+.btn-danger:focus {
+  background-color: #ff4181;
+  border-color: #ff4181;
+  color: white;
+  box-shadow: none;
+}
+
+.btn-danger:hover {
+  background-color: #ff418091;
+  border-color: #ff418091;
+}
+
+.btn-link {
+  color: cyan;
+}
+
+.btn-link:hover {
+  color: darkcyan;
+}
+
 .material-icons {
   cursor: pointer;
 }
