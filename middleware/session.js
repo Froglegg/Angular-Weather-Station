@@ -1,6 +1,6 @@
 const session = require("express-session");
 const redis = require("redis");
-const redisClient = redis.createClient();
+const redisClient = redis.createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
 require("dotenv").config();
 redisClient.on("error", err => {
@@ -17,7 +17,6 @@ module.exports = {
         cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
         store: new redisStore({
           host: process.env.REDIS_URL,
-          port: process.env.PORT || 6379,
           client: redisClient,
           ttl: 86400
         })
