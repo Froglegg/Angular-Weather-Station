@@ -1,0 +1,79 @@
+{
+  "_from": "ngx-skycons",
+  "_id": "ngx-skycons@1.2.2",
+  "_inBundle": false,
+  "_integrity": "sha512-KREnqIJjh2pvSEQjUQ+W66ty+gP56WMrlgqNnwIqF+KKkTtUziysBH2lcfGLju6+ftohaIK6QyAKzoK1snF50A==",
+  "_location": "/ngx-skycons",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ngx-skycons",
+    "name": "ngx-skycons",
+    "escapedName": "ngx-skycons",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ngx-skycons/-/ngx-skycons-1.2.2.tgz",
+  "_shasum": "bd5869b26092758748c559dbb1b6e5f2f5ca9e5c",
+  "_spec": "ngx-skycons",
+  "_where": "/Users/froglegg/Desktop/funStuff/apps/angularApps/weatherStation/client",
+  "author": {
+    "name": "Flexo Carpius",
+    "email": "flexocarpius@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/flexocarpius/ngx-skycons/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
+  "deprecated": false,
+  "description": "This is a Skycons Angular 7 library.",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/ngx-skycons.js",
+  "es2015": "fesm2015/ngx-skycons.js",
+  "esm2015": "esm2015/ngx-skycons.js",
+  "esm5": "esm5/ngx-skycons.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/ngx-skycons.js",
+  "fesm2015": "fesm2015/ngx-skycons.js",
+  "fesm5": "fesm5/ngx-skycons.js",
+  "homepage": "https://github.com/flexocarpius/ngx-skycons#readme",
+  "keywords": [
+    "skycons",
+    "weather",
+    "angular",
+    "ngx",
+    "darksky",
+    "icons",
+    "animated"
+  ],
+  "license": "Apache-2.0",
+  "main": "bundles/ngx-skycons.umd.js",
+  "metadata": "ngx-skycons.metadata.json",
+  "module": "fesm5/ngx-skycons.js",
+  "name": "ngx-skycons",
+  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  },
+  "repository": {
+    "url": "git+https://github.com/flexocarpius/ngx-skycons.git"
+  },
+  "sideEffects": false,
+  "typings": "ngx-skycons.d.ts",
+  "version": "1.2.2",
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "9.0.2",
+    "fesm2015": "9.0.2",
+    "typings": "9.0.2"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
+  }
+}

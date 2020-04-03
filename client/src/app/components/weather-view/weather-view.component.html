@@ -8,12 +8,7 @@
       <mat-spinner diameter="75"></mat-spinner>
     </div>
 
-    <div *ngIf="!loading && weatherIcon.icon" style="text-align:center;">
-      <!-- <sc-skycons
-        [weather]="weatherIcon.icon.split('-').join(' ')"
-        [color]="'#03dac5'"
-      ></sc-skycons> -->
-    </div>
+    <sc-skycons [weather]="'CLEAR_DAY'" [color]="'white'"></sc-skycons>
   </div>
   <div class="table-responsive" style="margin-top:25px;">
     <table class="table table-dark weather-view-table">
