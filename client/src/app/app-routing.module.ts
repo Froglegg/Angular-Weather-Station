@@ -4,6 +4,7 @@ import { LoginComponent } from "../app/components/login/login.component";
 import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
 import { WeatherDashComponent } from "../app/components/weather-dash/weather-dash.component";
 import { AuthGuardService as AuthGuard } from "./services/auth-guard.service";
+import { HeroFormComponent } from "./components/test-form/test-form.component";
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
     component: WeatherDashComponent,
     canActivate: [AuthGuard],
   },
+  { path: "test", component: HeroFormComponent },
   { path: "", redirectTo: "/dashboard", pathMatch: "full" },
 ];
 

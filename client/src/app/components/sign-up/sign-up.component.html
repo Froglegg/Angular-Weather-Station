@@ -3,11 +3,7 @@
 </div>
 <div class="container component-dark">
   <h2>Create new account</h2>
-  <form
-    method="post"
-    action="/api/users"
-    oninput='password2.setCustomValidity(password2.value != password.value ? "Passwords do not match." : "")'
-  >
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
     <div class="form-group">
       <label for="exampleInputEmail1">User Name</label>
       <input
@@ -16,6 +12,9 @@
         id="name"
         name="name"
         placeholder="Enter a user name"
+        required
+        [(ngModel)]="model.name"
+        #name="ngModel"
       />
     </div>
     <div class="form-group">
@@ -26,6 +25,9 @@
         id="email"
         name="email"
         placeholder="Enter email"
+        required
+        [(ngModel)]="model.email"
+        #email="ngModel"
       />
       <small id="emailHelp" class="form-text"
         >We'll never share your email with anyone else.</small
@@ -40,6 +42,8 @@
         placeholder="Password"
         required
         name="password"
+        [(ngModel)]="model.password"
+        #password="ngModel"
       />
     </div>
     <div class="form-group">
@@ -49,13 +53,46 @@
         class="form-control"
         id="password2"
         name="password2"
+        required
         placeholder="Confirm password"
+        [(ngModel)]="model.password2"
+        #password2="ngModel"
       />
+      <div
+        *ngIf="
+          password2.value != password.value &&
+          (password2.dirty || password2.touched)
+        "
+        class="alert alert-danger"
+      >
+        Password must match
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div *ngIf="submitted; else elseBlock">
+      <mat-spinner diameter="75"></mat-spinner>
+    </div>
+    <ng-template #elseBlock>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="
+          !signupForm.form.valid ||
+          (password2.value != password.value &&
+            (password2.dirty || password2.touched))
+        "
+      >
+        Submit
+      </button>
+    </ng-template>
+    <div [hidden]="!emailConflict" class="alert alert-danger">
+      This email already exists.
+    </div>
+    <div [hidden]="!serverError" class="alert alert-danger">
+      Server Error! Please contact Froglegg!
+    </div>
   </form>
   <br />
-  <p style="color:white">
+  <p style="color: white;">
     Already have an account? <a routerLink="/login">Login here.</a>
   </p>
 </div>

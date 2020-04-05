@@ -4,21 +4,41 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class UserService {
   constructor(private http: HttpClient) {}
 
   httpOptions = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" })
+    headers: new HttpHeaders({ "Content-Type": "application/json" }),
   };
 
   getdata(): Observable<any> {
     return this.http.get("/api/users/me", this.httpOptions).pipe(
-      tap(data => {
+      tap((data) => {
         data;
       }),
       catchError(this.handleError("test"))
+    );
+  }
+
+  login(user): Observable<any> {
+    console.log(user);
+    return this.http.post("/api/users/login", user, this.httpOptions).pipe(
+      tap((data) => {
+        data;
+      }),
+      catchError(this.handleError("login operation"))
+    );
+  }
+
+  signUp(user): Observable<any> {
+    console.log(user);
+    return this.http.post("/api/users", user, this.httpOptions).pipe(
+      tap((data) => {
+        data;
+      }),
+      catchError(this.handleError("signup operation"))
     );
   }
 
@@ -38,7 +58,7 @@ export class UserService {
       // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      return of(error as T);
     };
   }
 }

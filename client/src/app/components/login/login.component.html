@@ -3,17 +3,25 @@
 </div>
 <div class="container component-dark">
   <h2>Login</h2>
-  <form method="post" action="/api/users/login">
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
+      <label for="email">Email address</label>
       <input
         type="email"
         class="form-control"
         id="email"
         name="email"
+        required
+        [(ngModel)]="model.email"
         placeholder="Enter email"
+        #email="ngModel"
       />
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Email is required
+      </div>
     </div>
+
     <div class="form-group">
       <label for="password">Password</label>
       <input
@@ -22,12 +30,32 @@
         id="password"
         placeholder="Password"
         name="password"
+        required
+        [(ngModel)]="model.password"
+        #password="ngModel"
       />
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div *ngIf="submitted; else elseBlock">
+      <mat-spinner diameter="75"></mat-spinner>
+    </div>
+    <ng-template #elseBlock>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!loginForm.form.valid"
+      >
+        Submit
+      </button>
+    </ng-template>
+    <div [hidden]="!badLogin" class="alert alert-danger">
+      Bad login credentials!
+    </div>
+    <div [hidden]="!serverError" class="alert alert-danger">
+      Server Error! Please contact Froglegg!
+    </div>
   </form>
   <br />
-  <p style="color:white">
+  <p style="color: white;">
     Don't have an account? <a routerLink="/signup">Sign up here.</a>
   </p>
 </div>

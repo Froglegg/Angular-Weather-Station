@@ -131,3 +131,11 @@ p {
 .mat-spinner {
   margin: auto;
 }
+
+.alert-danger {
+  background-color: #ff418091;
+  border-color: #ff418091;
+  color: white;
+  margin-top: 15px;
+  width: 50%;
+}

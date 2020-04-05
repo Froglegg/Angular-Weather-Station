@@ -14,6 +14,9 @@ import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { SkyconsModule } from "ngx-skycons";
+import { HeroFormComponent } from "./components/test-form/test-form.component";
+
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { SkyconsModule } from "ngx-skycons";
     LoginComponent,
     SignUpComponent,
     LogoutComponent,
+    HeroFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +36,7 @@ import { SkyconsModule } from "ngx-skycons";
     HttpClientModule,
     MatProgressSpinnerModule,
     SkyconsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

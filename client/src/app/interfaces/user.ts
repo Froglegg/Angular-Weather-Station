@@ -1,1 +1,1 @@
-export interface user {}
+export interface User {}
