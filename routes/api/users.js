@@ -15,7 +15,7 @@ router.post("/users", async (req, res) => {
     const user = new User(req.body);
     await user.save();
     const token = await user.generateAuthToken();
-    req.session.key = token;
+    session.login(req, res, token);
     return res
       .status(200)
       .send({ status: 200, message: "Signup successfull!" });
@@ -39,7 +39,7 @@ router.post("/users/login", async (req, res) => {
       });
     } else {
       const token = await user.generateAuthToken();
-      req.session.key = token;
+      session.login(req, res, token);
       return res
         .status(200)
         .send({ status: 200, message: "Login successfull!" });

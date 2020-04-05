@@ -23,7 +23,6 @@ export class UserService {
   }
 
   login(user): Observable<any> {
-    console.log(user);
     return this.http.post("/api/users/login", user, this.httpOptions).pipe(
       tap((data) => {
         data;
@@ -33,12 +32,29 @@ export class UserService {
   }
 
   signUp(user): Observable<any> {
-    console.log(user);
     return this.http.post("/api/users", user, this.httpOptions).pipe(
       tap((data) => {
         data;
       }),
       catchError(this.handleError("signup operation"))
+    );
+  }
+
+  logOut(): Observable<any> {
+    return this.http.post("/api/users/me/logout", this.httpOptions).pipe(
+      tap((data) => {
+        data;
+      }),
+      catchError(this.handleError("logout operation"))
+    );
+  }
+
+  logOutAll(): Observable<any> {
+    return this.http.post("/api/users/me/logoutall", this.httpOptions).pipe(
+      tap((data) => {
+        data;
+      }),
+      catchError(this.handleError("logout all operation"))
     );
   }
 

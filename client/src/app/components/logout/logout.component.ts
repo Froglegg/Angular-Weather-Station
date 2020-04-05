@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "app-logout",
@@ -7,34 +8,22 @@ import { Router } from "@angular/router";
   styleUrls: ["./logout.component.css"],
 })
 export class LogoutComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   public logoutAll() {
-    fetch("api/users/me/logoutall", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.seshDestroyed) {
-          this.router.navigate(["/login"]);
-        }
-      })
-      .catch((err) => console.log(err));
+    this.userService.logOutAll().subscribe((res) => {
+      if (res.seshDestroyed) {
+        this.router.navigate(["/login"]);
+      }
+    });
   }
 
   public logout() {
-    fetch("api/users/me/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.seshDestroyed) {
-          this.router.navigate(["/login"]);
-        }
-      })
-      .catch((err) => console.log(err));
+    this.userService.logOut().subscribe((res) => {
+      if (res.seshDestroyed) {
+        this.router.navigate(["/login"]);
+      }
+    });
   }
 
   ngOnInit(): void {}

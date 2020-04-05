@@ -3,11 +3,11 @@ const redis = require("redis");
 const redisClient = redis.createClient(process.env.REDIS_URL);
 const redisStore = require("connect-redis")(session);
 require("dotenv").config();
-redisClient.on("error", err => {
+redisClient.on("error", (err) => {
   console.log("Redis error: ", err);
 });
 module.exports = {
-  session: sesh => {
+  session: (sesh) => {
     return sesh.use(
       session({
         secret: process.env.SESH_SECRET,
@@ -18,18 +18,17 @@ module.exports = {
         store: new redisStore({
           host: process.env.REDIS_URL,
           client: redisClient,
-          ttl: 86400
-        })
+          ttl: 86400,
+        }),
       })
     );
   },
   login: (req, res, token) => {
     req.session.key = token;
-    res.redirect("/");
   },
   logout: (req, res) => {
     req.session.key = "";
-    return req.session.destroy(err => {
+    return req.session.destroy((err) => {
       if (err) {
         console.log(err);
       } else {
@@ -37,5 +36,5 @@ module.exports = {
         res.json({ seshDestroyed: true });
       }
     });
-  }
+  },
 };
