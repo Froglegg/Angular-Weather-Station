@@ -12,9 +12,8 @@ import { LoginComponent } from "../app/components/login/login.component";
 import { SignUpComponent } from "../app/components/sign-up/sign-up.component";
 
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-
-import { SkyconsModule } from "ngx-skycons";
 import { LogoutComponent } from "./components/logout/logout.component";
+import { SkyconsModule } from "ngx-skycons";
 
 @NgModule({
   declarations: [
@@ -25,16 +24,16 @@ import { LogoutComponent } from "./components/logout/logout.component";
     TableComponent,
     LoginComponent,
     SignUpComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    SkyconsModule
+    SkyconsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

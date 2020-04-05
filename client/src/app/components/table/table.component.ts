@@ -5,7 +5,7 @@ import { WeatherService } from "../../services/weather.service";
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
-  styleUrls: ["./table.component.css"]
+  styleUrls: ["./table.component.css"],
 })
 export class TableComponent implements OnInit {
   @Input() locations: Location[];
@@ -22,9 +22,9 @@ export class TableComponent implements OnInit {
   onGetWeather(location: Location): void {
     this.clickedLocation = location;
     this.loadingEvent.emit(true);
-    this.weatherService.getWeather(location).subscribe(result => {
+    this.weatherService.getWeather(location).subscribe((result) => {
       this.loadingEvent.emit(false);
-
+      console.log(result);
       if (!result.noData) {
         this.noDataEvent.emit(false);
         this.weatherEvent.emit(result);
