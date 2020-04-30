@@ -23,7 +23,7 @@
     "@angular/router": "~9.0.2",
     "@auth0/angular-jwt": "^4.0.0",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngx-skycons": "git+https://github.com/Froglegg/ngx-skycons.git",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
